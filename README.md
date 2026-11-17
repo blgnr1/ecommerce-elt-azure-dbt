@@ -171,8 +171,8 @@ E-Commerce-ETL/
 
 ### 2. Projeyi Klonlayın ve Bağımlılıkları Yükleyin
 ```bash
-git clone https://github.com/kullanici-adiniz/E-Commerce-ETL.git
-cd E-Commerce-ETL
+git clone https://github.com/blgnr1/ecommerce-elt-azure-dbt.git
+cd ecommerce-elt-azure-dbt
 
 # Sanal ortam oluşturma ve etkinleştirme
 python -m venv .venv
