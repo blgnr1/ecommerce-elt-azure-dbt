@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Musteri boyut (dimension) tablosu. Demografik ve sadakat segmentlerini icerir."
+    columns:
+      - name: customer_id
+        description: "Musterinin benzersiz birincil anahtari."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_merchants
+    description: "Satici boyut (dimension) tablosu. Kategori, ulke ve risk seviyesi bilgilerini icerir."
+    columns:
+      - name: merchant_id
+        description: "Saticinin benzersiz birincil anahtari."
+        tests:
+          - unique
+          - not_null
+      - name: merchant_risk_tier
+        tests:
+          - accepted_values:
+              values: ['Dusuk Risk', 'Orta Risk', 'Yuksek Risk']
+
+  - name: fct_transaction
+    description: "E-ticaret islemleri olgu (fact) tablosu. Finansal tutarlar ve fraud sinyallerini tutar."
+    columns:
+      - name: transaction_id
+        description: "Islemin benzersiz birincil anahtari."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "dim_customers tablosuna baglanan yabanci anahtar (Foreign Key)."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: merchant_id
+        description: "dim_merchants tablosuna baglanan yabanci anahtar (Foreign Key)."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_merchants')
+              field: merchant_id
+
+      - name: gross_amount_usd
+        tests:
+          - not_null
+
+      - name: is_fraud
+        tests:
+          - not_null
