@@ -1,0 +1,7 @@
+pandas
+sqlalchemy
+pyodbc
+azure-storage-blob
+python-dotenv
+kagglehub
+dbt-sqlserver
